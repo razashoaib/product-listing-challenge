@@ -8,7 +8,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Products from "./Products";
 import Filters from "./Filters";
-import Constants from "../common/constants";
+import Constants from "../common/Constants";
 
 function Home() {
   const [catalogData, setCatalogData] = useState([]);

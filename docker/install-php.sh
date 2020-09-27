@@ -1,6 +1,6 @@
 #!/bin/sh
 
-apk add bzip2 file re2c freetds freetype icu libintl libldap libjpeg libmcrypt libpng libpq libwebp libzip nodejs npm yarn
+apk add bzip2 file re2c freetds freetype icu libintl libldap libjpeg libmcrypt libpng libpq libwebp libzip nodejs npm
 
 TMP="autoconf \
     bzip2-dev \
@@ -16,16 +16,13 @@ TMP="autoconf \
     libwebp-dev \
     libxml2-dev \
     libzip-dev \
-    make \
-    openldap-dev \
-    postgresql-dev"
+    make"
 
 apk add $TMP
 
 # Configure extensions
 docker-php-ext-configure gd --with-jpeg-dir=usr/ --with-freetype-dir=usr/ --with-webp-dir=usr/
 docker-php-ext-configure ldap --with-libdir=lib/
-docker-php-ext-configure pdo_dblib --with-libdir=lib/
 
 docker-php-ext-install \
     bz2 \
@@ -37,20 +34,7 @@ docker-php-ext-install \
     pdo_dblib \
     pdo_pgsql \
     xmlrpc \
-    zip \
-    mysqli \
-    pdo_mysql
-
-# Install Xdebug
-pecl install xdebug \
-    && docker-php-ext-enable xdebug \
-    && echo "remote_host=docker.for.mac.localhost" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "idekey=IDE_DEBUG" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "error_reporting=E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "display_startup_errors=On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "display_errors=On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    zip 
 
 # Install composer
 cd /tmp && php -r "readfile('https://getcomposer.org/installer');" | php && \

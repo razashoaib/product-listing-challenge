@@ -15,10 +15,6 @@ RUN /usr/sbin/install-php.sh
 COPY ./docker/*.ini /usr/local/etc/php/conf.d/
 COPY . .
 
-RUN composer install && composer update
-RUN php artisan key:generate
-RUN yarn install && yarn run dev
-
 # Change current user to www-data
 USER www-data
 

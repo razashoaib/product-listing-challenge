@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogContent from "@material-ui/core/DialogContent";
-import Constants from "../common/constants";
+import Constants from "../common/Constants";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const ProductVideoPreview = ({ closed, isOpen, productId }) => {
