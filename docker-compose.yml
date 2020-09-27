@@ -2,16 +2,13 @@ version: "3.7"
 services:
   # Laravel Service
   application:
-    container_name: product-listing
+    container_name: product-listing-challenge
     restart: always
     tty: true
     working_dir: /var/www/app
     build:
       context: .
       dockerfile: docker/Dockerfile
-    #    ports:
-    #      - 9001:9000
-    #      - 9002:9001
     volumes:
       - .:/var/www/app
     networks:
@@ -20,7 +17,7 @@ services:
   # Nginx Service
   server:
     image: nginx:alpine
-    container_name: server
+    container_name: application-server
     restart: always
     tty: true
     ports:

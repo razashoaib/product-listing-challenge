@@ -14,10 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('/test', function (Request $request) {
-    return response()->json('Hey mate');
+Route::group(['namespace' => 'App\Http\Controllers\API'], function () {
+    Route::get('/products', ['uses' => 'ProductController@getProducts']);
+    Route::get('/products/{product_id}/videos', ['uses' => 'ProductController@getProductVideoPreview']);
 });
